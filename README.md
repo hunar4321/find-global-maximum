@@ -1,2 +1,2 @@
-# Reaching-global-maximum
+# Reaching Global Maximum
 Simulations of life like characters and several learning algorthims to test the ability of each algorthim to reach global maxima
