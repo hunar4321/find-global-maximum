@@ -7,74 +7,68 @@ public class RandomSteps : MonoBehaviour
     Rigidbody rb;
     public GameObject agent;
     public Transform foot;
+    public int waitTime = 10;
+
+    private int timer;
 
     public LayerMask ground;
 
-    int xzRange = 200;
-    int[] yRange = { 100, 300 };
+    int xzRange = 100;
+    int[] yRange = { 100, 200 };
 
-    int[] dir= { 100, 200, 0 };
+    int[] dir = { 100, 200, 0 };
     float level1;
     float level2;
+    Vector3 pos;
 
-
-    void Start()
+    private void Awake()
     {
         Application.targetFrameRate = 30;
+    }
+    void Start()
+    {
+        timer = waitTime;
         rb = agent.GetComponent<Rigidbody>();
         MutateDirection(dir);
         level1 = agent.transform.position.y;
+        pos = agent.transform.position;
         rb.AddForce(dir[0], dir[1], dir[2]);
 
     }
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Space)){
-            Algorthim2();
-        //}
-
-    }
-
-    void Algorthim0()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (IsGrounded()) //&& timer < 1)
         {
-            Debug.Log("is grounded");
-            Debug.Log(dir[0]);
-            rb.AddForce(dir[0], dir[1], dir[2]);
-            MutateDirection(dir);
+            rb.velocity = Vector3.zero;
+            timer = waitTime;
+            Debug.DrawLine(pos, agent.transform.position, Color.yellow, 1000f);
+            pos = agent.transform.position;
+            Algorthim2();
         }
-    }
+        //timer = timer - 1;
 
+    }
 
     void Algorthim1()
     {
-        if (IsGrounded())
-        {
-            rb.AddForce(dir[0], dir[1], dir[2]);
-            MutateDirection(dir);
-        }
+        rb.AddForce(dir[0], dir[1], dir[2]);
+        MutateDirection(dir);
     }
 
     void Algorthim2()
     {
-        if (IsGrounded())
+        level2 = agent.transform.position.y;
+        rb.AddForce(dir[0], dir[1], dir[2]);
+
+        if (level2 <= level1)
         {
-            level2 = agent.transform.position.y;
-            rb.AddForce(dir[0], dir[1], dir[2]);
-
-            if (level2 <= level1)
-            {
-                //Debug.Log("Dir Changed");
-                MutateDirection(dir);
-            }
-            //Debug.Log("level1: " + level1.ToString() + " level2: " + level2.ToString());
-            level1 = level2;
+            //Debug.Log("Dir Changed");
+            MutateDirection(dir);
         }
+        //Debug.Log("level1: " + level1.ToString() + " level2: " + level2.ToString());
+        level1 = level2;
     }
-
-
 
     void MutateDirection(int[] dir)
     {
@@ -85,6 +79,6 @@ public class RandomSteps : MonoBehaviour
 
     bool IsGrounded()
     {
-        return Physics.CheckSphere(foot.position, 0.1f, ground);
+        return Physics.CheckSphere(foot.position, 0.3f, ground);
     }
 }
