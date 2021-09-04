@@ -7,23 +7,25 @@ public class GroupOfAgents : MonoBehaviour
 
     public GameObject agent;
     public int num = 100;
+    //private GameObject[] agents;
     private void Awake()
     {
         Application.targetFrameRate = 30;
+        //agents = new GameObject[num];
     }
 
 
     void Start()
     {
-        for (int i = 0; i < 100; ++i)
+        for (int i = 0; i < num; ++i)
         {
 
-            int x = Random.Range(0, 500);
-            int y = Random.Range(50, 200);
-            int z = Random.Range(0, 500);
-            var new_agent = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
-            AssignColor(new_agent);
-
+            int x = Random.Range(450, 500);
+            int y = Random.Range(50, 100);
+            int z = Random.Range(160, 330);
+            var agents = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
+            AssignColor(agents);
+            
         }
     }
 
@@ -39,6 +41,31 @@ public class GroupOfAgents : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var numAlive = GameObject.FindGameObjectsWithTag("Player").Length;
+            Debug.Log("Alive:" + numAlive);
+
+            var tobeBorn = num - numAlive;
+            for(int i=0; i<tobeBorn; i++)
+            {
+                int x = Random.Range(450, 500);
+                int y = Random.Range(50, 100);
+                int z = Random.Range(160, 330);
+                var agents = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
+                AssignColor(agents);
+                Debug.Log("New Born:" + tobeBorn);
+            }
+
+
+            //Debug.Log("hello");
+            //int x = Random.Range(450, 500);
+            //int y = Random.Range(50, 100);
+            //int z = Random.Range(160, 330);
+            //var agents = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
+            //AssignColor(agents);
+          
+        }
+
     }
 }

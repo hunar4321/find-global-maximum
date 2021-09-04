@@ -9,6 +9,9 @@ public class jumping : MonoBehaviour
     public GameObject agent;
     public Transform foot;
     public LayerMask ground;
+    public LayerMask water;
+    float raydist = 1.1f; //distance from center of the capusl to the ground is 1
+    float raydistWater = 0.8f;
 
 
     int xzRange = 100;
@@ -31,7 +34,7 @@ public class jumping : MonoBehaviour
         
         MutateDirection(dir);
         level1 = agent.transform.position.y;
-        pos = agent.transform.position;
+        pos = new Vector3(agent.transform.position.x, 0, agent.transform.position.z); // agent.transform.position;
         rb.AddForce(dir[0], dir[1], dir[2]);
         
     }
@@ -46,6 +49,9 @@ public class jumping : MonoBehaviour
             pos = agent.transform.position;
             Algorthim2();
         }
+        if (IsInWater()){
+            Destroy(agent);
+        }
     }
 
     void Algorthim1()
@@ -56,8 +62,8 @@ public class jumping : MonoBehaviour
 
     void Algorthim2()
     {
-        level2 = agent.transform.position.y;
         rb.AddForce(dir[0], dir[1], dir[2]);
+        level2 = agent.transform.position.y;
 
         if (level2 <= level1)
         {
@@ -75,6 +81,13 @@ public class jumping : MonoBehaviour
 
     bool IsGrounded()
     {
-        return Physics.CheckSphere(foot.transform.position, 0.3f, ground);
+        //return Physics.CheckSphere(foot.transform.position, 0.3f, ground);
+        return Physics.Raycast(agent.transform.position, Vector3.down, raydist);
+    }
+
+    bool IsInWater()
+    {
+        //return Physics.Raycast(agent.transform.position, Vector3.down, raydistWater);
+        return Physics.CheckSphere(foot.transform.position, 0.1f, water);
     }
 }
