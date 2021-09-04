@@ -16,6 +16,6 @@ public class Instanciate : MonoBehaviour
         //    int z = Random.Range(-500, 500);
         //    Instantiate(block, new Vector3(x, y, z), Quaternion.identity);
         //}
-
+        
     }
 }

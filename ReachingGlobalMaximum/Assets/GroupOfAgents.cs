@@ -21,8 +21,19 @@ public class GroupOfAgents : MonoBehaviour
             int x = Random.Range(0, 500);
             int y = Random.Range(50, 200);
             int z = Random.Range(0, 500);
-            Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
+            var new_agent = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
+            AssignColor(new_agent);
+
         }
+    }
+
+    void AssignColor(GameObject agent)
+    {
+        int tossColor = Random.Range(0, 3);
+        var rd = agent.GetComponent<Renderer>();
+        if (tossColor == 0) { rd.material.color = Color.black;}
+        else if(tossColor == 1){ rd.material.color = Color.yellow;}
+        else{ rd.material.color = Color.blue; }
     }
 
     // Update is called once per frame

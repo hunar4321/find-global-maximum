@@ -5,9 +5,11 @@ using UnityEngine;
 public class jumping : MonoBehaviour
 {
     Rigidbody rb;
+    Renderer rd;
     public GameObject agent;
     public Transform foot;
     public LayerMask ground;
+
 
     int xzRange = 100;
     int[] yRange = { 100, 200 };
@@ -23,12 +25,15 @@ public class jumping : MonoBehaviour
     }
     void Start()
     {
-
+        
         rb = agent.GetComponent<Rigidbody>();
+        //agent.GetComponent<Renderer>().material.color = Color.black;
+        
         MutateDirection(dir);
         level1 = agent.transform.position.y;
         pos = agent.transform.position;
         rb.AddForce(dir[0], dir[1], dir[2]);
+        
     }
 
     void Update()
