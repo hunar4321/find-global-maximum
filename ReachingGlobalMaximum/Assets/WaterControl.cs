@@ -12,11 +12,11 @@ public class WaterControl : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.Alpha1))
         {
             transform.Translate(new Vector3(0,speed,0));
         }
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.Alpha2))
         {
             transform.Translate(new Vector3(0, -speed, 0));
 

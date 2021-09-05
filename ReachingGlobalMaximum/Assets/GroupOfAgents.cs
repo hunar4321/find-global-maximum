@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GroupOfAgents : MonoBehaviour
 {
-
+    Rect popRect;
+    GUIStyle style;
+    int population;
     public GameObject agent;
     public int num = 100;
     public int xmin = 900;
@@ -27,6 +29,11 @@ public class GroupOfAgents : MonoBehaviour
 
     void Start()
     {
+        popRect = new Rect(20, 20, 400, 100);
+        style = new GUIStyle();
+        style.fontSize = 24;
+        StartCoroutine(CalculatePopulation());
+
         for (int i = 0; i < num; ++i)
         {
             
@@ -34,7 +41,6 @@ public class GroupOfAgents : MonoBehaviour
             int y = Random.Range(ymin, ymax);
             int z = Random.Range(zmin, zmax);
             var agents = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
-            //AssignColor(agents);
 
             Color cc = agents.GetComponent<Renderer>().material.color;
             Color new_color;
@@ -44,25 +50,13 @@ public class GroupOfAgents : MonoBehaviour
             rcc = Mathf.Clamp(rcc, 0, 1);
             gcc = Mathf.Clamp(gcc, 0, 1);
             int toss = Random.Range(0, 2);
-            if (toss == 0){ new_color = new Color(rcc, gcc, 0.6f, 0); }
-            else{ new_color = new Color(rcc, gcc, 0.5f, 0); }
+            if (toss == 0){ new_color = new Color(rcc, gcc, 0.7f, 0); }
+            else{ new_color = new Color(rcc, gcc, 0.4f, 0); }
 
             agents.GetComponent<Renderer>().material.SetColor("_Color", new_color);
 
-
         }
     }
-
-    //void AssignColor(GameObject agent)
-    //{
-        
-    //    int tossColor = Random.Range(0, 3);
-    //    var rd = agent.GetComponent<Renderer>();
-    //    if (tossColor == 0) { rd.material.color = Color.black;}
-    //    else if(tossColor == 1){ rd.material.color = Color.yellow;}
-    //    else{ rd.material.color = Color.blue; }
-    //}
-
     // Update is called once per frame
     void Update()
     {
@@ -70,10 +64,12 @@ public class GroupOfAgents : MonoBehaviour
         {
             var Players = GameObject.FindGameObjectsWithTag("Player");
             var numAlive = Players.Length;
+            
 
-            Debug.Log("Alive:" + numAlive);
+            //Debug.Log("Alive:" + numAlive);
 
-            var tobeBorn = num - numAlive;
+            //var tobeBorn = num - numAlive;
+            int tobeBorn = 50;
             for(int i=0; i<tobeBorn; i++)
             {
                 // randomly choose on of the alive ones to have a child (a better way is to chose the one with longest life)
@@ -95,25 +91,31 @@ public class GroupOfAgents : MonoBehaviour
                 rcc = Mathf.Clamp(rcc, 0, 1);
                 gcc = Mathf.Clamp(gcc, 0, 1);
                 int toss = Random.Range(0, 2);
-                if (toss == 0) { new_color = new Color(rcc, gcc, 0.6f, 0); }
-                else { new_color = new Color(rcc, gcc, 0.5f, 0); }
+                if (toss == 0) { new_color = new Color(rcc, gcc, 0.7f, 0); }
+                else { new_color = new Color(rcc, gcc, 0.4f, 0); }
 
                 agents.GetComponent<Renderer>().material.SetColor("_Color", new_color);
 
-                //AssignColor(agents);
-                Debug.Log("New Born:" + tobeBorn);
-                Debug.Log("rcc: " + rcc + "gcc: " + gcc);
+                //Debug.Log("New Born:" + tobeBorn);
+                //Debug.Log("rcc: " + rcc + "gcc: " + gcc);
             }
-
-
-            //Debug.Log("hello");
-            //int x = Random.Range(450, 500);
-            //int y = Random.Range(50, 100);
-            //int z = Random.Range(160, 330);
-            //var agents = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
-            //AssignColor(agents);
           
         }
 
     }
+
+    private IEnumerator CalculatePopulation()
+    {
+        while (true)
+        {
+            population= GameObject.FindGameObjectsWithTag("Player").Length;
+            yield return new WaitForSeconds(2);
+        }
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(popRect, "Population:" + population, style);
+    }
+
 }

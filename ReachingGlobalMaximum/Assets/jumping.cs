@@ -14,11 +14,11 @@ public class jumping : MonoBehaviour
     float raydistWater = 0.8f;
     bool liberal = false;
 
-    int xzRangeL = 100;
-    int[] yRangeL = { 100, 200 };
+    int xzRange = 100;
+    int[] yRange = { 100, 200 };
 
-    int xzRange = 300;
-    int[] yRange = { 200, 500 };
+    int xzRangeL = 400;
+    int[] yRangeL = { 300, 500 };
 
 
     int[] dir = { 100, 200, 0 };
@@ -35,7 +35,7 @@ public class jumping : MonoBehaviour
         rb = agent.GetComponent<Rigidbody>();
         Color cc = agent.GetComponent<Renderer>().material.color;
 
-        if (cc.b == 0.6){ liberal = true; }else{ liberal = false; }
+        if (cc.b > 0.5){ liberal = true; }else{ liberal = false; }
 
         MutateDirection(dir);
         level1 = agent.transform.position.y;
