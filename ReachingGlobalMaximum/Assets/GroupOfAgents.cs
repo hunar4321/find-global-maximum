@@ -19,6 +19,7 @@ public class GroupOfAgents : MonoBehaviour
     {
         Application.targetFrameRate = 30;
         //agents = new GameObject[num];
+ 
     }
 
 
@@ -38,6 +39,7 @@ public class GroupOfAgents : MonoBehaviour
 
     void AssignColor(GameObject agent)
     {
+        Color rgb = Color.HSVToRGB(0,0,0);
         int tossColor = Random.Range(0, 3);
         var rd = agent.GetComponent<Renderer>();
         if (tossColor == 0) { rd.material.color = Color.black;}
@@ -50,16 +52,30 @@ public class GroupOfAgents : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            var numAlive = GameObject.FindGameObjectsWithTag("Player").Length;
+            var Players = GameObject.FindGameObjectsWithTag("Player");
+            var numAlive = Players.Length;
+
             Debug.Log("Alive:" + numAlive);
 
             var tobeBorn = num - numAlive;
             for(int i=0; i<tobeBorn; i++)
             {
-                int x = Random.Range(450, 500);
-                int y = Random.Range(50, 100);
-                int z = Random.Range(160, 330);
+                // randomly choose on of the alive ones to have a child (a better way is to chose the one with longest life)
+                int ind = Random.Range(0, numAlive);
+                // determine the characters of the parent
+                Color cc = Players[ind].GetComponent<Renderer>().material.color;
+                Vector3 pos = Players[ind].transform.position;
+
+                
+
+                float x = pos.x; // Random.Range(xmin, xmax);
+                float y = pos.y; // Random.Range(ymin, ymax);
+                float z = pos.z; // Random.Range(zmin, zmax);
                 var agents = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
+                
+                //Color new_color = new Color(0, 0, 0, 0);
+                //agents.GetComponent<Renderer>().material.SetColor("_Color", new_color);
+
                 AssignColor(agents);
                 Debug.Log("New Born:" + tobeBorn);
             }
