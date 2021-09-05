@@ -7,6 +7,13 @@ public class GroupOfAgents : MonoBehaviour
 
     public GameObject agent;
     public int num = 100;
+    public int xmin = 900;
+    public int xmax = 1000;
+    public int zmin = 124;
+    public int zmax = 340;
+    public int ymin = 15;
+    public int ymax = 100;
+
     //private GameObject[] agents;
     private void Awake()
     {
@@ -20,9 +27,9 @@ public class GroupOfAgents : MonoBehaviour
         for (int i = 0; i < num; ++i)
         {
 
-            int x = Random.Range(450, 500);
-            int y = Random.Range(50, 100);
-            int z = Random.Range(160, 330);
+            int x = Random.Range(xmin, xmax);
+            int y = Random.Range(ymin, ymax);
+            int z = Random.Range(zmin, zmax);
             var agents = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
             AssignColor(agents);
             
