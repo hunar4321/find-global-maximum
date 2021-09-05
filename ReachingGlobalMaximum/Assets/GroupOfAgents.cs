@@ -14,6 +14,8 @@ public class GroupOfAgents : MonoBehaviour
     public int ymin = 15;
     public int ymax = 100;
 
+    float color_range = 0.1f;
+
     //private GameObject[] agents;
     private void Awake()
     {
@@ -27,25 +29,39 @@ public class GroupOfAgents : MonoBehaviour
     {
         for (int i = 0; i < num; ++i)
         {
-
+            
             int x = Random.Range(xmin, xmax);
             int y = Random.Range(ymin, ymax);
             int z = Random.Range(zmin, zmax);
             var agents = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
-            AssignColor(agents);
-            
+            //AssignColor(agents);
+
+            Color cc = agents.GetComponent<Renderer>().material.color;
+            Color new_color;
+            float rcc = cc.r + Random.Range(-color_range, color_range);
+            float gcc = cc.g + Random.Range(-color_range, color_range);
+
+            rcc = Mathf.Clamp(rcc, 0, 1);
+            gcc = Mathf.Clamp(gcc, 0, 1);
+            int toss = Random.Range(0, 2);
+            if (toss == 0){ new_color = new Color(rcc, gcc, 0.6f, 0); }
+            else{ new_color = new Color(rcc, gcc, 0.5f, 0); }
+
+            agents.GetComponent<Renderer>().material.SetColor("_Color", new_color);
+
+
         }
     }
 
-    void AssignColor(GameObject agent)
-    {
+    //void AssignColor(GameObject agent)
+    //{
         
-        int tossColor = Random.Range(0, 3);
-        var rd = agent.GetComponent<Renderer>();
-        if (tossColor == 0) { rd.material.color = Color.black;}
-        else if(tossColor == 1){ rd.material.color = Color.yellow;}
-        else{ rd.material.color = Color.blue; }
-    }
+    //    int tossColor = Random.Range(0, 3);
+    //    var rd = agent.GetComponent<Renderer>();
+    //    if (tossColor == 0) { rd.material.color = Color.black;}
+    //    else if(tossColor == 1){ rd.material.color = Color.yellow;}
+    //    else{ rd.material.color = Color.blue; }
+    //}
 
     // Update is called once per frame
     void Update()
@@ -66,18 +82,27 @@ public class GroupOfAgents : MonoBehaviour
                 Color cc = Players[ind].GetComponent<Renderer>().material.color;
                 Vector3 pos = Players[ind].transform.position;
 
-                
-
                 float x = pos.x; // Random.Range(xmin, xmax);
                 float y = pos.y; // Random.Range(ymin, ymax);
                 float z = pos.z; // Random.Range(zmin, zmax);
                 var agents = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
-                
-                //Color new_color = new Color(0, 0, 0, 0);
-                //agents.GetComponent<Renderer>().material.SetColor("_Color", new_color);
 
-                AssignColor(agents);
+                color_range = 0.2f;
+                Color new_color;
+                float rcc = cc.r + Random.Range(-color_range, color_range);
+                float gcc = cc.g + Random.Range(-color_range, color_range);
+
+                rcc = Mathf.Clamp(rcc, 0, 1);
+                gcc = Mathf.Clamp(gcc, 0, 1);
+                int toss = Random.Range(0, 2);
+                if (toss == 0) { new_color = new Color(rcc, gcc, 0.6f, 0); }
+                else { new_color = new Color(rcc, gcc, 0.5f, 0); }
+
+                agents.GetComponent<Renderer>().material.SetColor("_Color", new_color);
+
+                //AssignColor(agents);
                 Debug.Log("New Born:" + tobeBorn);
+                Debug.Log("rcc: " + rcc + "gcc: " + gcc);
             }
 
 

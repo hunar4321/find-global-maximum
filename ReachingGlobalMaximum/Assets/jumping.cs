@@ -12,16 +12,19 @@ public class jumping : MonoBehaviour
     public LayerMask water;
     float raydist = 1.1f; //distance from center of the capusl to the ground is 1
     float raydistWater = 0.8f;
+    bool liberal = false;
 
+    int xzRangeL = 100;
+    int[] yRangeL = { 100, 200 };
 
-    int xzRange = 100;
-    int[] yRange = { 100, 200 };
+    int xzRange = 300;
+    int[] yRange = { 200, 500 };
+
 
     int[] dir = { 100, 200, 0 };
     float level1;
     float level2;
     Vector3 pos;
-
     private void Awake()
     {
         Application.targetFrameRate = 30;
@@ -30,8 +33,10 @@ public class jumping : MonoBehaviour
     {
         
         rb = agent.GetComponent<Rigidbody>();
-        //agent.GetComponent<Renderer>().material.color = Color.black;
-        
+        Color cc = agent.GetComponent<Renderer>().material.color;
+
+        if (cc.b == 0.6){ liberal = true; }else{ liberal = false; }
+
         MutateDirection(dir);
         level1 = agent.transform.position.y;
         pos = new Vector3(agent.transform.position.x, 0, agent.transform.position.z); // agent.transform.position;
@@ -74,9 +79,19 @@ public class jumping : MonoBehaviour
 
     void MutateDirection(int[] dir)
     {
-        dir[0] = Random.Range(-xzRange, xzRange); //x
-        dir[1] = Random.Range(yRange[0], yRange[1]); //y jump
-        dir[2] = Random.Range(-xzRange, xzRange); //z
+        if (liberal == false)
+        {
+            dir[0] = Random.Range(-xzRange, xzRange); //x
+            dir[1] = Random.Range(yRange[0], yRange[1]); //y jump
+            dir[2] = Random.Range(-xzRange, xzRange); //z
+        }
+        else
+        {
+            dir[0] = Random.Range(-xzRangeL, xzRangeL); //x
+            dir[1] = Random.Range(yRangeL[0], yRangeL[1]); //y jump
+            dir[2] = Random.Range(-xzRangeL, xzRangeL); //z
+        }
+
     }
 
     bool IsGrounded()
