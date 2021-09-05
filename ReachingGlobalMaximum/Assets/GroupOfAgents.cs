@@ -39,7 +39,7 @@ public class GroupOfAgents : MonoBehaviour
 
     void AssignColor(GameObject agent)
     {
-        Color rgb = Color.HSVToRGB(0,0,0);
+        
         int tossColor = Random.Range(0, 3);
         var rd = agent.GetComponent<Renderer>();
         if (tossColor == 0) { rd.material.color = Color.black;}
