@@ -70,7 +70,7 @@ public class GroupOfAgents : MonoBehaviour
             var Players = GameObject.FindGameObjectsWithTag("Player");
             var numAlive = Players.Length;
             //dead += (previousAlive - numAlive);
-
+           
             //Debug.Log("Alive:" + numAlive);
 
             //var tobeBorn = num - numAlive;
