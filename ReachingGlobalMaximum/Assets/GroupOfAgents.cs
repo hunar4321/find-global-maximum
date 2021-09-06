@@ -5,8 +5,11 @@ using UnityEngine;
 public class GroupOfAgents : MonoBehaviour
 {
     Rect popRect;
+    Rect dedRect;
     GUIStyle style;
     int population;
+    int dead = 0;
+    int previousAlive = 0;
     public GameObject agent;
     public int num = 100;
     public int xmin = 900;
@@ -30,10 +33,11 @@ public class GroupOfAgents : MonoBehaviour
     void Start()
     {
         popRect = new Rect(20, 20, 400, 100);
+        //dedRect = new Rect(20, 40, 400, 100);
         style = new GUIStyle();
         style.fontSize = 24;
         StartCoroutine(CalculatePopulation());
-
+        previousAlive = num;
         for (int i = 0; i < num; ++i)
         {
             
@@ -61,16 +65,19 @@ public class GroupOfAgents : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
+        //if (Input.GetKeyDown(KeyCode.Mouse0)) 
         {
             var Players = GameObject.FindGameObjectsWithTag("Player");
             var numAlive = Players.Length;
-            
+            //dead += (previousAlive - numAlive);
 
             //Debug.Log("Alive:" + numAlive);
 
             //var tobeBorn = num - numAlive;
             int tobeBorn = 50;
-            for(int i=0; i<tobeBorn; i++)
+            //previousAlive = numAlive + 50; ;
+
+            for (int i=0; i<tobeBorn; i++)
             {
                 // randomly choose on of the alive ones to have a child (a better way is to chose the one with longest life)
                 int ind = Random.Range(0, numAlive);
@@ -92,7 +99,7 @@ public class GroupOfAgents : MonoBehaviour
                 gcc = Mathf.Clamp(gcc, 0, 1);
                 int toss = Random.Range(0, 2);
                 if (toss == 0) { new_color = new Color(rcc, gcc, 0.7f, 0); }
-                else { new_color = new Color(rcc, gcc, 0.4f, 0); }
+                else { new_color = new Color(cc.r, cc.g, 0.4f, 0); }
 
                 agents.GetComponent<Renderer>().material.SetColor("_Color", new_color);
 
@@ -108,7 +115,7 @@ public class GroupOfAgents : MonoBehaviour
     {
         while (true)
         {
-            population= GameObject.FindGameObjectsWithTag("Player").Length;
+            population = GameObject.FindGameObjectsWithTag("Player").Length;
             yield return new WaitForSeconds(2);
         }
     }
@@ -116,6 +123,7 @@ public class GroupOfAgents : MonoBehaviour
     private void OnGUI()
     {
         GUI.Label(popRect, "Population:" + population, style);
+        //GUI.Label(dedRect, "Dead:" + dead, style);
     }
 
 }

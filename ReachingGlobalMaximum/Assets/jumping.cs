@@ -96,8 +96,8 @@ public class jumping : MonoBehaviour
 
     bool IsGrounded()
     {
-        //return Physics.CheckSphere(foot.transform.position, 0.3f, ground);
-        return Physics.Raycast(agent.transform.position, Vector3.down, raydist);
+        return Physics.CheckSphere(foot.transform.position, 0.3f, ground);
+        //return Physics.Raycast(agent.transform.position, Vector3.down, raydist);
     }
 
     bool IsInWater()
