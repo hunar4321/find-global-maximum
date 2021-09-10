@@ -3,6 +3,7 @@ Simulations of life like characters and several learning algorthims to test the 
 
 
 **Demo1**
+
 Reaching global maximum
 
 ![](images/game_extinction1.gif)
@@ -10,7 +11,9 @@ Reaching global maximum
 
 **Demo2**
 
-![](images/lib_v_cons.JPG)
+liberal vs conservative
+
+![](images/lib_v_cons.gif)
 </br>
 
 
