@@ -1,5 +1,5 @@
 # Reaching Global Maximum
-Simulations of life like characters and several learning algorthims to test the ability of each algorthim to reach global maximum
+Simulations of life like characters and several learning algorthims to test the ability of each algorthim to reach global maximum (Unity framework)
 
 
 **Demo1**
