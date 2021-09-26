@@ -20,3 +20,8 @@ liberal vs conservative
 </br>
 
 
+**Online Link**
+play with the simulation here:
+
+https://simmer.io/@hunar/reaching-global-maxima
+
