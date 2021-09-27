@@ -17,8 +17,8 @@ public class CamControl : MonoBehaviour
 
     void Start()
     {
-        cam0.SetActive(false);
-        cam1.SetActive(true);
+        cam0.SetActive(true);
+        cam1.SetActive(false);
         cam2.SetActive(false);
         cam3.SetActive(false);
         cam4.SetActive(false);

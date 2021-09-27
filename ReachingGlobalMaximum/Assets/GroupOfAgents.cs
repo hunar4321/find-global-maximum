@@ -11,7 +11,7 @@ public class GroupOfAgents : MonoBehaviour
     int dead = 0;
     int previousAlive = 0;
     public GameObject agent;
-    public int num = 100;
+    public int num = 300;
     public int xmin = 900;
     public int xmax = 1000;
     public int zmin = 124;
@@ -35,7 +35,7 @@ public class GroupOfAgents : MonoBehaviour
         popRect = new Rect(20, 20, 400, 100);
         //dedRect = new Rect(20, 40, 400, 100);
         style = new GUIStyle();
-        style.fontSize = 24;
+        style.fontSize = 18;
         StartCoroutine(CalculatePopulation());
         previousAlive = num;
         for (int i = 0; i < num; ++i)
@@ -47,15 +47,26 @@ public class GroupOfAgents : MonoBehaviour
             var agents = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
 
             Color cc = agents.GetComponent<Renderer>().material.color;
-            Color new_color;
-            float rcc = cc.r + Random.Range(-color_range, color_range);
-            float gcc = cc.g + Random.Range(-color_range, color_range);
 
-            rcc = Mathf.Clamp(rcc, 0, 1);
-            gcc = Mathf.Clamp(gcc, 0, 1);
             int toss = Random.Range(0, 2);
-            if (toss == 0){ new_color = new Color(rcc, gcc, 0.7f, 0); }
-            else{ new_color = new Color(rcc, gcc, 0.4f, 0); }
+            Color new_color;
+
+            //color_range = 0.2f;
+            //float rcc = cc.r + Random.Range(-color_range, color_range);
+            //float gcc = cc.g + Random.Range(-color_range, color_range);
+            //rcc = Mathf.Clamp(rcc, 0, 1);
+            //gcc = Mathf.Clamp(gcc, 0, 1);
+            //if (toss == 0) { new_color = new Color(rcc, gcc, 0.7f, 0); }
+            //else { new_color = new Color(cc.r, cc.g, 0.4f, 0); }
+
+            if (toss == 0)
+            {
+                new_color = new Color(0f, 0f, 0.8f, 0); // liberal
+            }
+            else
+            {
+                new_color = new Color(0.8f, 0f, 0.0f, 0); // conservative
+            }
 
             agents.GetComponent<Renderer>().material.SetColor("_Color", new_color);
 
@@ -74,37 +85,52 @@ public class GroupOfAgents : MonoBehaviour
             //Debug.Log("Alive:" + numAlive);
 
             //var tobeBorn = num - numAlive;
-            int tobeBorn = 50;
+            int tobeBorn = 10; // new born every time spacebar is pressed
             //previousAlive = numAlive + 50; ;
 
-            for (int i=0; i<tobeBorn; i++)
+            if (numAlive < (num - tobeBorn))
             {
-                // randomly choose on of the alive ones to have a child (a better way is to chose the one with longest life)
-                int ind = Random.Range(0, numAlive);
-                // determine the characters of the parent
-                Color cc = Players[ind].GetComponent<Renderer>().material.color;
-                Vector3 pos = Players[ind].transform.position;
 
-                float x = pos.x; // Random.Range(xmin, xmax);
-                float y = pos.y; // Random.Range(ymin, ymax);
-                float z = pos.z; // Random.Range(zmin, zmax);
-                var agents = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
+                for (int i = 0; i < tobeBorn; i++)
+                {
 
-                color_range = 0.2f;
-                Color new_color;
-                float rcc = cc.r + Random.Range(-color_range, color_range);
-                float gcc = cc.g + Random.Range(-color_range, color_range);
+                    // randomly choose on of the alive ones to have a child (a better way is to chose the one with longest life)
+                    int ind = Random.Range(0, numAlive);
+                    // determine the characters of the parent
+                    Color cc = Players[ind].GetComponent<Renderer>().material.color;
+                    Vector3 pos = Players[ind].transform.position;
 
-                rcc = Mathf.Clamp(rcc, 0, 1);
-                gcc = Mathf.Clamp(gcc, 0, 1);
-                int toss = Random.Range(0, 2);
-                if (toss == 0) { new_color = new Color(rcc, gcc, 0.7f, 0); }
-                else { new_color = new Color(cc.r, cc.g, 0.4f, 0); }
+                    float x = pos.x; // Random.Range(xmin, xmax);
+                    float y = pos.y; // Random.Range(ymin, ymax);
+                    float z = pos.z; // Random.Range(zmin, zmax);
+                    var agents = Instantiate(agent, new Vector3(x, y, z), Quaternion.identity);
 
-                agents.GetComponent<Renderer>().material.SetColor("_Color", new_color);
+                    int toss = Random.Range(0, 2);
+                    Color new_color;
 
-                //Debug.Log("New Born:" + tobeBorn);
-                //Debug.Log("rcc: " + rcc + "gcc: " + gcc);
+                    //color_range = 0.2f;
+                    //float rcc = cc.r + Random.Range(-color_range, color_range);
+                    //float gcc = cc.g + Random.Range(-color_range, color_range);
+                    //rcc = Mathf.Clamp(rcc, 0, 1);
+                    //gcc = Mathf.Clamp(gcc, 0, 1);
+                    //if (toss == 0) { new_color = new Color(rcc, gcc, 0.7f, 0); }
+                    //else { new_color = new Color(cc.r, cc.g, 0.4f, 0); }
+
+                    if (toss == 0)
+                    {
+                        new_color = new Color(0f, 0f, 0.8f, 0); // liberal
+                    }
+                    else
+                    {
+                        new_color = new Color(0.8f, 0f, 0.0f, 0); // conservative
+                    }
+
+                    agents.GetComponent<Renderer>().material.SetColor("_Color", new_color);
+
+                    //Debug.Log("New Born:" + tobeBorn);
+                    //Debug.Log("rcc: " + rcc + "gcc: " + gcc);
+                }
+
             }
           
         }
