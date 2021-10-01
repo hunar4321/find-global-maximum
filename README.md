@@ -7,16 +7,13 @@ https://youtu.be/TOV8udlg1CA
 **Detailed Video Explanation:**
 https://youtu.be/1p11-oggW1E
 
-**Demo1**
 
-Reaching global maximum
+**Reaching Global Maximum**
 
 ![](images/game_extinction1.gif)
 </br>
 
-**Demo2**
-
-liberal vs conservative
+**Liberal vs Conservative**
 
 ![](images/lib_v_cons.gif)
 </br>
