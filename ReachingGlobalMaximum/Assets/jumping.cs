@@ -14,16 +14,12 @@ public class jumping : MonoBehaviour
     float raydistWater = 0.8f;
     bool liberal = false;
 
-    int xzRange = 100;
-    int[] yRange = { 100, 200 };
+    int Xmove = 0;
+    int Ymove = 0;
+    int Zmove = 0;
 
-    int xzRangeL = 400;
-    int[] yRangeL = { 300, 500 };
-
-
-    int[] dir = { 100, 200, 0 };
-    float level1;
-    float level2;
+    float oldState = 0;
+    float newState = 0;
     Vector3 pos;
     private void Awake()
     {
@@ -37,10 +33,10 @@ public class jumping : MonoBehaviour
 
         if (cc.b > 0.5){ liberal = true; }else{ liberal = false; }
 
-        MutateDirection(dir);
-        level1 = agent.transform.position.y;
+        MutateDirection();
+        oldState = agent.transform.position.y;
         pos = new Vector3(agent.transform.position.x, 0, agent.transform.position.z); // agent.transform.position;
-        rb.AddForce(dir[0], dir[1], dir[2]);
+        rb.AddForce(Xmove, Ymove, Zmove);
         
     }
 
@@ -48,7 +44,6 @@ public class jumping : MonoBehaviour
     {
         if (IsGrounded())
         {
-
             rb.velocity = Vector3.zero;
             Debug.DrawLine(pos, agent.transform.position, Color.yellow, 1000f);
             pos = agent.transform.position;
@@ -61,35 +56,37 @@ public class jumping : MonoBehaviour
 
     void Algorthim1()
     {
-        rb.AddForce(dir[0], dir[1], dir[2]);
-        MutateDirection(dir);
+        rb.AddForce(Xmove, Ymove, Zmove);
+        MutateDirection();
     }
 
     void Algorthim2()
     {
-        rb.AddForce(dir[0], dir[1], dir[2]);
-        level2 = agent.transform.position.y;
+        rb.AddForce(Xmove, Ymove, Zmove);
+        newState = agent.transform.position.y;
 
-        if (level2 <= level1)
+        if (newState <= oldState)
         {
-            MutateDirection(dir);
+            MutateDirection();
         }
-        level1 = level2;
+        oldState = newState;
     }
 
-    void MutateDirection(int[] dir)
+    void MutateDirection()
     {
         if (liberal == false)
         {
-            dir[0] = Random.Range(-xzRange, xzRange); //x
-            dir[1] = Random.Range(yRange[0], yRange[1]); //y jump
-            dir[2] = Random.Range(-xzRange, xzRange); //z
+            int step = 100;
+            Xmove = Random.Range(-step, step); //x
+            Ymove = Random.Range(step, step*2); //y jump
+            Zmove = Random.Range(-step, step); //z
         }
         else
         {
-            dir[0] = Random.Range(-xzRangeL, xzRangeL); //x
-            dir[1] = Random.Range(yRangeL[0], yRangeL[1]); //y jump
-            dir[2] = Random.Range(-xzRangeL, xzRangeL); //z
+            int step = 400;
+            Xmove = Random.Range(-step, step); //x
+            Ymove = Random.Range(step-100, step+100); //y jump
+            Zmove = Random.Range(-step, step); //z
         }
 
     }
