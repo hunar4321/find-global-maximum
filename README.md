@@ -8,7 +8,7 @@ https://youtu.be/TOV8udlg1CA
 https://youtu.be/1p11-oggW1E
 
 **Online Link**
-play with the simulation here:
+play with the simulation in your browser here:
 https://simmer.io/@hunar/reaching-global-maxima
 
 ![](images/game_extinction1.gif)
