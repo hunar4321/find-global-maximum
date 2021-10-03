@@ -7,6 +7,9 @@ https://youtu.be/TOV8udlg1CA
 **Detailed Video Explanation:**
 https://youtu.be/1p11-oggW1E
 
+**Online Link**
+play with the simulation here:
+https://simmer.io/@hunar/reaching-global-maxima
 
 **Reaching Global Maximum**
 
@@ -19,8 +22,5 @@ https://youtu.be/1p11-oggW1E
 </br>
 
 
-**Online Link**
-play with the simulation here:
 
-https://simmer.io/@hunar/reaching-global-maxima
 
