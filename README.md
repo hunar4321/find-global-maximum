@@ -11,8 +11,6 @@ https://youtu.be/1p11-oggW1E
 play with the simulation here:
 https://simmer.io/@hunar/reaching-global-maxima
 
-**Reaching Global Maximum**
-
 ![](images/game_extinction1.gif)
 </br>
 
