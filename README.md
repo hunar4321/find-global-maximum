@@ -1,9 +1,9 @@
 # Reaching Global Maximum
-Simulations of life like characters and several learning algorthims to test the ability of each algorthim to reach global maximum (Unity framework)
-
-**Video Explanation:**
+Simulations of life like characters and several learning algorthims to test the ability of each algorthim to reach global maximum (Unity framework)/Video Explanation:
 https://youtu.be/1p11-oggW1E
 
+
+**Screen Shots**
 ![](images/game_extinction1.gif)
 </br>
 
