@@ -5,7 +5,11 @@ https://youtu.be/1p11-oggW1E
 </br>
 
 Play with the simulation in your browser here:
+
 https://simmer.io/@hunar/reaching-global-maxima
+
+Or download the binaries here for Windows:
+https://github.com/hunar4321/find-global-maximum/releases/tag/v.0.1.0
 
 </br>
 
