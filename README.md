@@ -1,15 +1,12 @@
 # Reaching Global Maximum
-Simulations of life-like agents with limited eyesights moving on a complex landscape with the objective to reach the highest point of the landscape. The simulation tests several learing algorthims visually in an interacive and educational way to shawcase reaching the global maximum (Unity 3D framework). Video Explanation:
+Simulations of life-like agents with limited eyesights moving on a complex landscape with the objective to reach the highest point of the landscape. The simulation tests several learing algorthims visually in an interacive and educational way to shawcase reaching the global maximum (Unity 3D framework). 
+
+# Video Explanation:
 https://youtu.be/1p11-oggW1E
 
-</br>
-
-Play with the simulation in your browser here:
-
-https://simmer.io/@hunar/reaching-global-maxima
-
-Or download the binaries here for Windows:
-https://github.com/hunar4321/find-global-maximum/releases/tag/v.0.1.0
+# Play with the simulation here:
+- Online: https://simmer.io/@hunar/reaching-global-maxima
+- Or download the binaries: https://github.com/hunar4321/find-global-maximum/releases/tag/v.0.1.0
 
 </br>
 
