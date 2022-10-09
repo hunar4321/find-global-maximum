@@ -4,6 +4,11 @@ https://youtu.be/1p11-oggW1E
 
 </br>
 
+Play with the simulation in your browser here:
+https://simmer.io/@hunar/reaching-global-maxima
+
+</br>
+
 **ScreenShots**
 
 ![](images/game_extinction1.gif)
@@ -20,9 +25,6 @@ Important Note:
 Some experts say that Local Maxima doesn't matter in very high dimensional landscapes. This is true if the convergence speed doesn't matter and also if all dimensions have equal weights. However, we know that is not the case, convergence speed always matters in a competitive world like ours as all Life forms are in a tough race for survival. Also, not all dimensions have the same impactful weight. Many dimensions can be ignored or they are already pruned or not accessible, therefore, the actual number of the plausible dimensions is much less than the available dimensions.
 
 Website: https://www.brainxyz.com/
-
-Play with the simulation in your browser here:
-https://simmer.io/@hunar/reaching-global-maxima
 
 Your objective is to help the characters to reach the Global Maximum by elevating the water levels (to simulate threat) and also by making the characters reproduce by pressing the space button (max number is 300).
 Controllers:
