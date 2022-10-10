@@ -1,5 +1,5 @@
 # Reaching Global Maximum
-Simulations of life-like agents with limited eyesights moving on a complex landscape with the objective to reach the highest point of the landscape. The simulation tests several learing algorthims visually in an interacive and educational way to shawcase reaching the global maximum (Unity 3D framework). 
+Simulations of life-like agents with limited eyesights moving on a complex landscape with the objective to reach the highest point of the landscape. The simulation tests several learing algorthims visually in an interacive and educational way to shawcase reaching the global maximum (Unity 3D framework). A simpler version of this algorithm without the Unity framework can be found here: https://github.com/hunar4321/genetic-algorithm
 
 # Video Explanation:
 https://youtu.be/1p11-oggW1E
